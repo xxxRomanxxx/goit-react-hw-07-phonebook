@@ -4,7 +4,8 @@ import { setFilter } from "../../redux/filterSlice";
 
 const Filter = () => {
 	const dispatch = useDispatch();
-	const onFilterChange = (evt) => dispatch(setFilter(evt.currentTarget.value));
+  
+	const onFilterChange = evt => dispatch(setFilter(evt.currentTarget.value));  
 
 	return (
 		<label className={css.filter}>

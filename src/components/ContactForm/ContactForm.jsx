@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { addContact } from "../../redux/contactsSlice";
+import { addContact } from "../../redux/operations";
 import css from "./ContactForm.module.css";
 import { getContacts } from "../../redux/selector";
 
-const ContactForm = () => {
+export default function ContactForm() {
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
@@ -12,11 +12,15 @@ const ContactForm = () => {
     defaultValues: {
       name: '',
       number: '',
-    }
+    },
   });
 
-  const onSubmit = ({name, number}) => {
-    if (contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase())) {
+  const onSubmit = ({ name, number }) => {
+    if (
+      contacts.some(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      )
+    ) {
       alert(`${name} is already in contacts.`);
       return;
     }
@@ -24,7 +28,7 @@ const ContactForm = () => {
       alert(`${number} is already in contacts.`);
       return;
     }
-    dispatch(addContact({name, number})); 
+    dispatch(addContact({ name, number }));
     reset();
   };
 
@@ -58,5 +62,3 @@ const ContactForm = () => {
           </form>
           );
     }
- 
-export default ContactForm;
